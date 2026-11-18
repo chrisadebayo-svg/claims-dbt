@@ -1,0 +1,26 @@
+name: claims_dbt
+version: "1.0.0"
+profile: claims_dbt
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+
+seeds:
+  claims_dbt:
+    +column_types:          # load raw claims as strings, like a real raw extract
+      claim_id: string
+      policy_ref: string
+      clm_status: string
+      notified_dt: string
+      reserve_amt: string
+      paid_amt: string
+      updated_at: string
+
+models:
+  claims_dbt:
+    staging:
+      +materialized: view
+    marts:
+      +materialized: table
